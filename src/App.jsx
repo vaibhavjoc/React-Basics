@@ -3,47 +3,38 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 
+import { PostComponent } from "./Post";
+
 function App() {
-  return (
-    <div style={{ background: "#dfe6e9", height: "100vh" }}>
-      <ToggleMessage/>
-      <br />
-      <IncreaseCount/>
-    </div>
-  );
-}
 
-const ToggleMessage = () => {
-  const [isVisible, setIsVisible] = useState(false);
+  const [posts, setPosts] = useState([]);
 
-  return (
-    <div>
+  const postComponents = posts.map(post => <PostComponent
+    name={post.name}
+    subtitle={post.subtitle}
+    time={post.time}
+    image={post.image}
+    description={post.description}
+  />)
 
-      <button onClick={() => setIsVisible(!isVisible)}>
-        Toggle Message
-      </button>
-      {isVisible && <p>This message is conditionally rendered!</p>}
-
-    </div>
-  );
-};
-
-function IncreaseCount() {
-  const [count, setCount] = useState(0);
-
-  function increment() {
-    setCount(count + 1);
+  function addPost() {
+    setPosts([...posts, {
+      name: "harkirat",
+      subtitle: "11000 followers",
+      time: "2m ago",
+      image: "https:/appx-wsb-gcp-mcdn.akamai.net.in/subject/2023-01-17-0.17044360120951185.jpg",
+      description: "What to know how to win big? Check out how these folks won $6000 in bounties."
+    }])
   }
 
   return (
-    <div>
-
-      <div>
-        <button onClick={increment}>Increase Count</button>
+    <div style={{ background: "#dfe6e9", height: "100vh" }}>
+      <button onClick={addPost}>Add post</button>
+      <div style={{ display: "flex", justifyContent: "center", margin: 10 }}>
+        <div>
+          {postComponents}
+        </div>
       </div>
-
-      <h1>Counter {count}</h1>
-
     </div>
   );
 }
