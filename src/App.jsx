@@ -7,25 +7,28 @@ import { PostComponent } from "./Post";
 
 function App() {
 
-  const [count, setCount] = useState(1);
+  const [currentTAb, setCurrentTAb] = useState("feed")
 
-  function increaseCount() {
-    setCount(count => count + 1)
-  }
+  return (
+    <div>
+      
+      <button onClick={function () { setCurrentTAb("feed") }} style={{
+        color: currentTAb == "feed" ? "red" : "black"
+      }} >Feed</button>
 
-  useEffect(function () {
-    setInterval(increaseCount, 1000)
-  }, [])
+      <button onClick={() => { setCurrentTAb("Notifications") }} style={{
+        color: currentTAb == "Notifications" ? "red" : "black"
+      }} >Notifications</button>
 
-  return (<div>
-    <div style={{ display: 'flex' }}>
-      <div style={{ background: "red", borderRadius: 20, width: 30, height: 26, textAlign: 'center', paddingTop: 2, marginLeft: 8 }}>
-        {count}
-      </div>
+      <button onClick={() => { setCurrentTAb("jobs")  }} style={{
+        color: currentTAb == "jobs" ? "red" : "black"
+      }} >jobs</button>
+
+      <button onClick={() => { setCurrentTAb("messages") }} style={{
+        color: currentTAb == "messages" ? "red" : "black"
+      }} >messages</button>
+
     </div>
-    <img style={{ cursor: "pointer" }} src="https://icons.veryicon.com/png/o/miscellaneous/fine-fillet-icon/notification-bell.png" alt="bellIcon" width={45} />
-    <button onClick={increaseCount}>Increase Count</button>
-  </div>
   );
 }
 
