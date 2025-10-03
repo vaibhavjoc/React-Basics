@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
@@ -10,8 +10,12 @@ function App() {
   const [count, setCount] = useState(1);
 
   function increaseCount() {
-    setCount(count + 1)
+    setCount(count => count + 1)
   }
+
+  useEffect(function () {
+    setInterval(increaseCount, 1000)
+  }, [])
 
   return (<div>
     <div style={{ display: 'flex' }}>
@@ -19,7 +23,7 @@ function App() {
         {count}
       </div>
     </div>
-    <img style={{cursor: "pointer"}} src="https://icons.veryicon.com/png/o/miscellaneous/fine-fillet-icon/notification-bell.png" alt="bellIcon" width={45} />
+    <img style={{ cursor: "pointer" }} src="https://icons.veryicon.com/png/o/miscellaneous/fine-fillet-icon/notification-bell.png" alt="bellIcon" width={45} />
     <button onClick={increaseCount}>Increase Count</button>
   </div>
   );
