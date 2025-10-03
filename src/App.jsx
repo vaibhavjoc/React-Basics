@@ -7,45 +7,46 @@ import { PostComponent } from "./Post";
 
 function App() {
 
-  const [currentTAb, setCurrentTAb] = useState(1);
-  const [tabData, setTabData] = useState({});
-  const [loading, setLoading] = useState(true);
+  const [showTimer, setShowTimer] = useState(true);
 
-  useEffect(function(){
-    setLoading(true);
-    fetch("https://jsonplaceholder.typicode.com/todos/" + currentTAb)
-    .then(async res => {
-      const json = await res.json();
-      setTabData(json)
-
-      setLoading(false);
-    })
-  }, [currentTAb])
+  useEffect(function () {
+    setInterval(() => {
+      setShowTimer(c => !c)
+    }, 5000);
+  },[])
 
   return (
     <div>
-      
-      <button onClick={function () { setCurrentTAb(1) }} style={{
-        color: currentTAb == 1 ? "red" : "black"
-      }} >Todo #1</button>
-
-      <button onClick={() => { setCurrentTAb(2) }} style={{
-        color: currentTAb == 2 ? "red" : "black"
-      }} >Todo #2</button>
-
-      <button onClick={() => { setCurrentTAb(3)  }} style={{
-        color: currentTAb == 3 ? "red" : "black"
-      }} >Todo #3</button>
-
-      <button onClick={() => { setCurrentTAb(4) }} style={{
-        color: currentTAb == 4 ? "red" : "black"
-      }} >Todo #4</button>
-
-      <br />
-      {loading ? "loading....." : tabData.title}
-
+      {showTimer && <Timer />}
     </div>
   );
+}
+
+function Timer() {
+  const [seconds, setSeconds] = useState(0);
+
+  useEffect(function () {
+    let clock = setInterval(() => {
+      console.log("from inside clock");
+      setSeconds(s => s + 1)
+    }, 1000);
+
+    //cleanup code, the clock will continue running if we don't call this function
+    //a new clock will always comes but the old one will continue running
+    return function() {
+      clearInterval(clock)
+      console.log("clock removed")
+    }
+
+  },[])
+  
+
+  return (
+    <div>
+      {seconds} seconds elapsed
+    </div>
+  )
+
 }
 
 export default App
