@@ -7,46 +7,33 @@ import { PostComponent } from "./Post";
 
 function App() {
 
-  const [showTimer, setShowTimer] = useState(true);
+  return <div style={{ display: "flex" }}>
+    <Card>
+      <div style={{ color: "aqua", }}>
+        What do you want to post?
+        <br /> <br />
+        <input type={"text"} placeholder={"post something"} />
+      </div>
+    </Card>
 
-  useEffect(function () {
-    setInterval(() => {
-      setShowTimer(c => !c)
-    }, 5000);
-  },[])
+    <Card children={
+      <div children={<div style={{ color: "aquamarine" }}>Hi Theer</div>} ></div>
+    } />
+  </div>
 
-  return (
-    <div>
-      {showTimer && <Timer />}
-    </div>
-  );
 }
 
-function Timer() {
-  const [seconds, setSeconds] = useState(0);
-
-  useEffect(function () {
-    let clock = setInterval(() => {
-      console.log("from inside clock");
-      setSeconds(s => s + 1)
-    }, 1000);
-
-    //cleanup code, the clock will continue running if we don't call this function
-    //a new clock will always comes but the old one will continue running
-    return function() {
-      clearInterval(clock)
-      console.log("clock removed")
-    }
-
-  },[])
-  
-
-  return (
-    <div>
-      {seconds} seconds elapsed
-    </div>
-  )
-
+function Card({ children }) {
+  return <div style={{
+    border: '1px solid #0914e6df',
+    borderRadius: '5px',
+    backgroundColor: "black",
+    padding: '20px',
+    margin: '10px',
+    boxShadow: '2px 2px 5px rgba(216, 214, 214, 0.1)',
+  }}>
+    {children}
+  </div>
 }
 
 export default App
