@@ -1,39 +1,29 @@
-import { useEffect, useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-
-import { PostComponent } from "./Post";
+import React from 'react';
+import { useState } from 'react'
 
 function App() {
-
-  return <div style={{ display: "flex" }}>
+  return (<div>
     <Card>
-      <div style={{ color: "aqua", }}>
-        What do you want to post?
-        <br /> <br />
-        <input type={"text"} placeholder={"post something"} />
-      </div>
+      <h1>Ladle kaisen bha</h1>
+      <p>lappe pe lappe pde mitar</p>
     </Card>
-
-    <Card children={
-      <div children={<div style={{ color: "aquamarine" }}>Hi Theer</div>} ></div>
-    } />
-  </div>
-
+    <Card>
+      <h1>Oho dajyu ki karn cha ra tum?</h1>
+      <p>madua rot khan chi re bhula</p>
+    </Card>
+  </div>)
 }
 
-function Card({ children }) {
-  return <div style={{
-    border: '1px solid #0914e6df',
-    borderRadius: '5px',
-    backgroundColor: "black",
-    padding: '20px',
-    margin: '10px',
-    boxShadow: '2px 2px 5px rgba(216, 214, 214, 0.1)',
-  }}>
+function Card({children}){
+  return (<div style={{
+            border: '1px solid #ccc',
+            borderRadius: '5px',
+            padding: '20px',
+            margin: '10px',
+            boxShadow: '2px 2px 5px rgba(0, 0, 0, 0.1)',
+        }}>
     {children}
-  </div>
+  </div>)
 }
 
 export default App
