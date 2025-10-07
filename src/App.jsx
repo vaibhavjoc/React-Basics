@@ -2,43 +2,32 @@ import React from 'react';
 import { useState } from 'react'
 
 function App() {
-  const [isModalOpen, setModalOpen] = useState(false);
 
   return (
     <div>
-      <button onClick={() => setModalOpen(true)}>Open Modal</button>
-      <Modal isOpen={isModalOpen} onClose={() => setModalOpen(false)}>
-        <h2>Gabru Night</h2>
-        <p>You are welcome to React Gabru Night....</p>
-      </Modal>
+      <Card title="Section 1">
+        <h2>Hlo motto</h2>
+        <p>kas cha dagri</p>
+      </Card>
+      <br />
+      <Card title="Section 2">
+        <h2>dajyu kah bat lagi rhi cha</h2>
+        <p>chale ghar janu chyu bhula</p>
+      </Card>
     </div>
   )
 }
 
-function Modal({ isOpen, onClose, children }) {
-  if (!isOpen) return null;
+function Card({ title, children }) {
+
+  const [isOpen, setOpen] = useState(false)
 
   return (
-    <div style={{
-      position: 'fixed',
-      top: 0,
-      left: 0,
-      right: 0,
-      bottom: 0,
-      backgroundColor: 'rgba(0, 0, 0, 0.5)',
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-    }}>
-      <div style={{
-        background: 'white',
-        padding: '20px',
-        borderRadius: '5px',
-      }}>
-        <button onClick={onClose}>Close</button>
-        {children}
-      </div>
-    </div>)
+    <div>
+      <button onClick={() => setOpen(!isOpen)}>{title} {isOpen ? "-":"+"} </button>
+      {isOpen && children}
+    </div>
+  )
 }
 
 export default App
