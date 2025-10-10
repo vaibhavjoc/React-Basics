@@ -3,27 +3,41 @@ import { useState } from 'react'
 
 function App() {
 
-  //create a ref to store the input element
-  const inputRef = useRef(null)
+  const [count, setCount] = useState(0);
+  const [counts, setCounts] = useState(0);
 
-  //define the function to focus on input
-  function focusInput() {
+  //here we have used useRef to create a reference to a value
+  //since it does not re-renders when updated
+  const timer = useRef()
+  const timers = useRef()
 
-    //Access the DOM node and call the focus method
-    inputRef.current.focus();
+  function startTimer() {
+    let value = setInterval(() => {
+      setCount(c => c + 1)
+    }, 1000);
+    let values = setInterval(() => {
+      setCounts(c => c + 1)
+    }, 10);
+
+    // we have assigned the current setInterval to timer
+    // so that we can clear it with function stopTimer
+    timer.current = value
+    timers.current = values
   }
 
-  return (
-    <div>
-      <h2>Focus On Input</h2>
+  function stopTimer() {
+    clearInterval(timer.current)
+    clearInterval(timers.current)
+  }
 
-      {/* Attach the ref to input element */}
-      <input ref={inputRef} type="text" placeholder='click button to focus on me' />
-      <br />
-      <br />
-      <button onClick={focusInput}>Focus Input</button>
+  return(
+    <div>
+      <h1>{count}:{counts}</h1>
+      <button onClick={startTimer}>Start</button>
+      <button onClick={stopTimer}>Stop</button>
     </div>
   )
+
 }
 
 export default App
