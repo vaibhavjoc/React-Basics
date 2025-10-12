@@ -30,8 +30,6 @@ function BulbProvider({ children }) {
 
 function App() {
 
-  const [bulbOn, setBulbOn] = useState(true)
-
   return (
     <>
       <BulbProvider >
