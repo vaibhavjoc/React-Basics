@@ -8,11 +8,14 @@ import './App.css'
 function useFetch(url) {
 
     const [finaldata, setFinalData] = useState({})
+    const [loading, setLoading] = useState(true)
 
     async function getDetails() {
+        setLoading(true)
         const response = await fetch(url)
         const json = await response.json();
         setFinalData(json)
+        setLoading(false)
     }
 
     console.log(url)
@@ -22,7 +25,8 @@ function useFetch(url) {
     }, [url])
 
     return {
-        finaldata
+        finaldata,
+        loading
     }
 
 }
@@ -31,8 +35,7 @@ function App() {
 
     const [currentPost, setCurrentPost] = useState(2)
 
-    const { finaldata } = useFetch("https://jsonplaceholder.typicode.com/posts/" + currentPost)
-
+    const { finaldata, loading } = useFetch("https://jsonplaceholder.typicode.com/posts/" + currentPost)
 
     return (
         <>
@@ -49,7 +52,7 @@ function App() {
                 textAlign: "center",
                 color: "#6A0066",
             }}>
-                <h1>{finaldata.title}</h1>
+                <h1>{ loading ? "loading...." : finaldata.title}</h1>
             </div>
         </>
 
